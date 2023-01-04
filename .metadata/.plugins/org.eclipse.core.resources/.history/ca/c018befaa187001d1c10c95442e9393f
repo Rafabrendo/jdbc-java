@@ -1,0 +1,44 @@
+package db;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.Properties;
+
+public class DB {
+	
+	//Esse connection vai ser o objeto de conexão com o banco de dados do jdbc
+	//Escolha o connection do java.sql
+	private static Connection conn = null;
+	
+	//Metodo para conectar o banco de dados
+	public static Connection getConnection() {
+		
+	}
+	
+	
+	
+	
+	//Vou criar um metodo auxiliar para carregar as propiedades que estão salvas no 
+	//arquilo file -> dv.properties
+	//basicamente eu terei que abrir o file db.properties, ler os dados e guardar no objeto
+	//desse tipo aqui(Properties)
+	private static Properties loadProperties() {
+		try(FileInputStream fs = new FileInputStream("db.properties")){
+			//recebeu como parametro o nome do arquivo. Como o arquivo está na pasta raiz do 
+			//projeto, é só colocar o nome assim que vai dar certo
+			Properties props = new Properties();
+			props.load(fs);//Esse comando load vai fazer a leitura do arquivo, apontado pelo 
+			//meu stream fs e vai guardar os dados dentro do objeto props
+			//obs.: Essa operação pode dar algum erro.
+			return props;
+			
+			
+		}
+		catch(IOException e) {
+			throw new DbException(e.getMessage());
+			//Minha excessão personalizada. Vai 'buscar' lá na minha classe de excessão que eu fiz
+			
+		}
+	}
+}

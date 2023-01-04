@@ -1,0 +1,41 @@
+package application;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import db.DB;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Connection conn =  null;
+		Statement st = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DB.getConnection();
+			//Para conectar ao banco de dados
+			
+			st = conn.createStatement();
+			//Instanciei um objeto do tipo statement
+			
+			rs = st.executeQuery("select * from department");
+			//vai executar uma consulta ao banco de dados e vai trazer o resultado ao rs
+			
+			
+			//o next vai retornar falso se estiver no último, por isso eu coloco o while
+			while (rs.next()) {
+				System.out.println(rs.getInt("Id")+ ", " + rs.getString("Name"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}

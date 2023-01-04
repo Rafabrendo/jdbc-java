@@ -1,0 +1,48 @@
+package application;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import db.DB;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Connection conn = null;
+		PreparedStatement st = null;
+		
+		try {
+			conn = DB.getConnection();
+			
+			//DELETAR DADOS
+			//tenho que passar uma restrição(Obrigatorio!)
+			st = conn.prepareStatement(
+					"DELETE FROM department "
+					+ "WHERE "
+					+ "Id = ?");
+			
+			//primeiro eu passo qual '?' eu vou mudar, que vai ser o numero 1
+			//dps eu escolho o valor //Eu escolhi o valor 5 que é o D1
+			//st.setInt(1, 5);
+			
+			//vou tentar apagar o departamento de código 2
+			st.setInt(1, 2); //Esse vai estourar o stacktr
+			
+			
+			//vai me dizer quantas linhas foram afetadas //tbm executei o camndo sql executeUpdate
+			int rowsAffected = st.executeUpdate();
+			
+			System.out.println("Done! Rows affected: " + rowsAffected);
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeConnection();
+		}
+   }
+}
