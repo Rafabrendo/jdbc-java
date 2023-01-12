@@ -64,7 +64,7 @@ public class DB {
 	
 	
 	//Vou criar um metodo auxiliar para carregar as propiedades que estão salvas no 
-	//arquilo file -> dv.properties
+	//arquilo file -> db.properties
 	//basicamente eu terei que abrir o file db.properties, ler os dados e guardar no objeto
 	//desse tipo aqui(Properties)
 	private static Properties loadProperties() {
